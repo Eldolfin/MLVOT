@@ -8,12 +8,16 @@ def main():
 
     while cap.isOpened():
         ret, frame = cap.read()
+        if not ret:
+            break
         centers = Detector.detect(frame)
+        if centers == []:
+            print("No balls detected !")
+        pred = kalman_filter.predict(centers[0])
+        kalman_filter.update(centers[0])
 
-        if centers != []:
-            pred = kalman_filter.predict(centers[0])
-            print(pred)
-            kalman_filter.update(centers[0])
+        
+
     cap.release()
 
 if __name__ == "__main__":

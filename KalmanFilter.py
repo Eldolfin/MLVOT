@@ -44,10 +44,15 @@ class KalmanFilter:
     def predict(self, cur_pos: np.array):
         self.alexis[:2] = cur_pos.T
         self.alexis = self.A @ self.alexis + self.B @ self.u
-        err = self.A @ self.P * self.A.T + self.Q
+        self.P = self.A @ self.P * self.A.T + self.Q
         return self.alexis
 
 
     def update(self, cur_pos: np.array):
-        pass
+        S_k = self.H @ self.P @ self.H.T + self.R
+        K_k = self.P @ self.H.T @ np.linalg.inv(S_k)
+        # __import__("pdb").set_trace()
+
+        self.alexis = self.alexis + K_k @ (cur_pos.T - self.H @ self.alexis)[0]
+        self.P = (np.identity(4) - K_k @ self.H) @ self.P
 
