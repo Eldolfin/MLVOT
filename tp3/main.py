@@ -11,11 +11,14 @@ def main():
     # Configuration
     # Assumes standard MOT structure if not provided
     seq_name = "ADL-Rundle-6"
-    data_root = os.path.join(os.path.dirname(__file__), "data")
+    # Use data from tp2
+    data_root = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "tp2", "data")
+    )
     seq_path = os.path.join(data_root, seq_name)
 
     img_dir = os.path.join(seq_path, "img1")
-    det_path = os.path.join(seq_path, "det", "det.txt")
+    det_path = os.path.join(seq_path, "det", "public-dataset", "det.txt")
     output_video_path = "output_tp3.avi"
     output_res_path = f"{seq_name}.txt"
 

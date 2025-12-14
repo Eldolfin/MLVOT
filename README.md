@@ -26,11 +26,12 @@ tp2/data/ADL-Rundle-6/
         000001.jpg
         ...
     det/
-        det.txt
+        public-dataset/
+            det.txt
 ```
 
-(The scripts in TP3 and TP4 will look for the data in their respective `data/`
-folders or you can use relative paths).
+(The scripts in TP3 and TP4 will look for the data in `tp2/data/` relative to
+their execution path).
 
 ## Running the Demos
 

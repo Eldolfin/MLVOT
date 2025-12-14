@@ -15,7 +15,7 @@ def main():
     seq_path = os.path.join(data_root, seq_name)
 
     img_dir = os.path.join(seq_path, "img1")
-    det_path = os.path.join(seq_path, "det", "det.txt")
+    det_path = os.path.join(seq_path, "det", "public-dataset", "det.txt")
     output_video_path = "output_tp2.avi"
     output_res_path = f"{seq_name}.txt"
 
@@ -26,8 +26,6 @@ def main():
         print(
             "Please ensure the 'ADL-Rundle-6' dataset is present in a 'data' folder inside 'tp2'."
         )
-        # For demonstration purposes in a CLI environment without data, we might want to exit or mock.
-        # But per instructions to "Make sure it runs fine", I will allow it to fail gracefully if data is missing.
         sys.exit(1)
 
     # Load detections
