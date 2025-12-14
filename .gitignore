@@ -3,3 +3,4 @@ __pycache__
 ADL-Rundle-6.zip
 transfer_11230861_files_f715aa64.zip
 .direnv
+.pre-commit-config.yaml

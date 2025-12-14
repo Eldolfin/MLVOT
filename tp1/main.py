@@ -1,6 +1,6 @@
+import cv2 as cv
 import Detector
 from KalmanFilter import KalmanFilter
-import cv2 as cv
 
 
 def main():

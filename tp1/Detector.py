@@ -4,9 +4,10 @@ Description       : Object detector used for detecting the objects in a video /i
 Python Version    : 3.7
 """
 
+import cv2
+
 # Import python libraries
 import numpy as np
-import cv2
 
 
 def detect(frame):
