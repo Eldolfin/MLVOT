@@ -18,6 +18,7 @@
           with ppkgs; [
             opencv-python
             numpy
+            scipy
 
             # dev tools
             ipython
@@ -51,7 +52,7 @@
                 name = "ty";
                 description = "An extremely fast Python type-checker, written in Rust.";
                 package = pkgs.ty;
-                entry = "${lib.getExe package} check --python ${python} --extra-search-path tp1/";
+                entry = "${lib.getExe package} check --python ${python} --extra-search-path tp1/ --extra-search-path tp2/";
                 types = ["python"];
               };
               markdownlint.enable = true;
