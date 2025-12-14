@@ -40,9 +40,36 @@ nix develop
 * **`KalmanFilter.py`**: (Presumed) Implementation of the Kalman Filter logic.
 * **`objTracking.py`**: Currently empty.
 
-### `tp2/`
+### `tp2/` (Tracking with Detection and Association)
 
-* Currently empty directory.
+* **`main.py`**: Entry point for TP2.
+* **`tracker.py`**: Likely implements the tracking logic, potentially including
+  detection and association components.
+* **`utils.py`**: Utility functions for TP2.
+* **`data/ADL-Rundle-6/...`**: Contains data specific to the ADL-Rundle-6
+  dataset for this TP.
+
+### `tp3/` (Tracking with Advanced Detection and Association)
+
+* **`main.py`**: Entry point for TP3.
+* **`tracker.py`**: Implements advanced tracking logic.
+* **`utils.py`**: Utility functions for TP3.
+* **`data/ADL-Rundle-6/...`**: Contains data specific to the ADL-Rundle-6
+  dataset.
+* **`det/`**: Directory likely containing detection results or configurations.
+* **`img1/`**: Directory likely containing image sequences for processing.
+
+### `tp4/` (Tracking with Re-Identification)
+
+* **`main.py`**: Entry point for TP4.
+* **`tracker_reid.py`**: Focuses on tracking incorporating Re-Identification
+  (ReID) techniques, likely utilizing the `reid_osnet_x025_market1501.onnx`
+  model mentioned in the root.
+* **`utils.py`**: Utility functions for TP4.
+* **`data/ADL-Rundle-6/...`**: Contains data specific to the ADL-Rundle-6
+  dataset.
+* **`det/`**: Directory likely containing detection results or configurations.
+* **`img1/`**: Directory likely containing image sequences for processing.
 
 ### Root Files
 

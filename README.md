@@ -87,3 +87,27 @@ Run the pre-commit hooks to ensure code quality:
 ```bash
 prek
 ```
+
+## Results Gallery
+
+Visualizations of the tracking results found in the [Project Report](./report.pdf):
+
+### TP1: Kalman Filter Tracking
+
+![TP1 Result](./report/images/tp1_res.png)
+
+### TP2: IoU-based Tracking
+
+![TP2 Result](./report/images/tp2_res.png)
+
+### TP3: Kalman-Guided IoU Tracking
+
+![TP3 Result](./report/images/tp3_res.png)
+
+### TP4: Appearance-Aware (ReID) Tracking
+
+![TP4 Result](./report/images/tp4_res.png)
+
+### Dataset Sample (ADL-Rundle-6)
+
+![Dataset Sample](./report/images/dataset_sample.jpg)
