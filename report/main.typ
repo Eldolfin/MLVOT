@@ -3,7 +3,7 @@
 
 #set document(
   title: "MLVOT Project Report",
-  author: "Oscar",
+  author: "Oscar Le Dauphin",
   date: datetime.today(),
 )
 
@@ -28,10 +28,10 @@
   #text(size: 14pt)[Machine Learning for Visual Object Tracking]
   
   #v(2cm)
-  #text(size: 12pt)[Oscar]
+  #text(size: 12pt)[Oscar Le Dauphin]
   
   #v(0.5cm)
-  #text(size: 12pt)[SCIA - 2025]
+  #text(size: 12pt)[SCIA - 2026]
 ]
 
 #pagebreak()
@@ -245,5 +245,3 @@ We utilize an *OSNet* model to extract a 512-dimensional feature vector for each
   ],
   caption: [Successful re-identification after occlusion using visual features.]
 )
-
-#bibliography("refs.bib")

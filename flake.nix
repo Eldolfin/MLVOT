@@ -42,6 +42,7 @@
                 python
                 pkgs.typst
                 pkgs.just
+                pkgs.ffmpeg
               ];
           };
 
