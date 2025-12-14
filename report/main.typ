@@ -287,5 +287,3 @@ We utilize an *OSNet* model to extract a 512-dimensional feature vector for each
   image("images/tp4_res.png", width: 100%),
   caption: [Successful re-identification after occlusion using visual features.]
 )
-
-#bibliography("refs.bib")

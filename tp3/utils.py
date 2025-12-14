@@ -60,5 +60,6 @@ def save_results(
         writer = csv.writer(f, delimiter=",")
         for res in results:
             # <frame>, <id>, <bb_left>, <bb_top>, <bb_width>, <bb_height>, <conf>, -1, -1, -1
-            line = list(res) + [-1, -1, -1]
+            # Subject requires conf to be a flag 1
+            line = list(res[:6]) + [1] + [-1, -1, -1]
             writer.writerow(line)

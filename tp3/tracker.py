@@ -87,11 +87,11 @@ class Track:
         cy = box[1] + box[3] / 2
         # We need to manually set the initial state in the KF if it doesn't support it in __init__
         # TP1 KF initialized to zeros. Let's update it once with the initial measurement.
-        # self.kf.alexis = np.array([cx, cy, 0, 0])
-        setattr(self.kf, "alexis", np.array([cx, cy, 0, 0]))
-        # Hack: directly setting internal state 'alexis' because TP1 KF didn't have a setter?
+        # self.kf.state = np.array([cx, cy, 0, 0])
+        setattr(self.kf, "state", np.array([cx, cy, 0, 0]))
+        # Hack: directly setting internal state 'state' because TP1 KF didn't have a setter?
         # Checking TP1/KalmanFilter.py:
-        # self.alexis = np.zeros(4)
+        # self.state = np.zeros(4)
         # It's public.
 
         # We also need to store width and height to reconstruct box from centroid prediction
@@ -104,9 +104,9 @@ class Track:
         Updates the bounding box based on predicted centroid.
         """
         self.kf.predict()
-        # kf.alexis is [x, y, vx, vy]
-        pred_cx = self.kf.alexis[0]
-        pred_cy = self.kf.alexis[1]
+        # kf.state is [x, y, vx, vy]
+        pred_cx = self.kf.state[0]
+        pred_cy = self.kf.state[1]
 
         # Update box based on predicted centroid and stored dimensions
         # box = [x, y, w, h] => x = cx - w/2
@@ -137,9 +137,9 @@ class Track:
         self.h = box[3]
 
         # Update box with the CORRECTED state (posterior) from KF
-        # After update(), kf.alexis is the updated state
-        updated_cx = self.kf.alexis[0]
-        updated_cy = self.kf.alexis[1]
+        # After update(), kf.state is the updated state
+        updated_cx = self.kf.state[0]
+        updated_cy = self.kf.state[1]
 
         self.box = [updated_cx - self.w / 2, updated_cy - self.h / 2, self.w, self.h]
 

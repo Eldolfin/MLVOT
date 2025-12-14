@@ -124,23 +124,15 @@ class Track:
 
         cx = box[0] + box[2] / 2
         cy = box[1] + box[3] / 2
-        setattr(self.kf, "alexis", np.array([cx, cy, 0, 0]))
+        setattr(self.kf, "state", np.array([cx, cy, 0, 0]))
 
         self.w = box[2]
         self.h = box[3]
 
     def predict(self):
         self.kf.predict()
-        # kf.alexis is [x, y, vx, vy]
-        # pred_cx = self.kf.alexis[0]
-        # pred_cy = self.kf.alexis[1]
-
-        # In TP1 KalmanFilter:
-        # self.alexis = self.A @ self.alexis + self.B @ self.u
-        # So we can access it directly.
-        state = getattr(self.kf, "alexis")
+        state = getattr(self.kf, "state")
         pred_cx, pred_cy = state[0], state[1]
-
         self.box = [pred_cx - self.w / 2, pred_cy - self.h / 2, self.w, self.h]
 
     def update(self, box: List[float], feature: np.ndarray, info: float = 0.0):
@@ -160,7 +152,7 @@ class Track:
         self.w = box[2]
         self.h = box[3]
 
-        state = getattr(self.kf, "alexis")
+        state = getattr(self.kf, "state")
         updated_cx, updated_cy = state[0], state[1]
 
         self.box = [updated_cx - self.w / 2, updated_cy - self.h / 2, self.w, self.h]

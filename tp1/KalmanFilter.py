@@ -12,7 +12,7 @@ class KalmanFilter:
         y_dt_meas: float,
     ):
         self.u = (u_x, u_y)
-        self.alexis = np.zeros(4)
+        self.state = np.zeros(4)
         self.A = np.asarray([[1, 0, dt, 0], [0, 1, 0, dt], [0, 0, 1, 0], [0, 0, 0, 1]])
         dt_square = dt**2
         self.B = np.asarray(
@@ -36,12 +36,12 @@ class KalmanFilter:
         self.P = np.identity(4)
 
     def predict(self):
-        self.alexis = self.A @ self.alexis + self.B @ self.u
-        self.P = self.A @ self.P * self.A.T + self.Q
+        self.state = self.A @ self.state + self.B @ self.u
+        self.P = self.A @ self.P @ self.A.T + self.Q
 
     def update(self, cur_pos: np.ndarray):
         S_k = self.H @ self.P @ self.H.T + self.R
         K_k = self.P @ self.H.T @ np.linalg.inv(S_k)
-        self.alexis = self.alexis + K_k @ (cur_pos.T - self.H @ self.alexis)[0]
+        self.state = self.state + K_k @ (cur_pos.T - self.H @ self.state)[0]
         self.P = (np.identity(4) - K_k @ self.H) @ self.P
-        return self.alexis
+        return self.state
