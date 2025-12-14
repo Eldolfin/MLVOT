@@ -62,6 +62,9 @@ nix develop
     python main.py
     ```
 
+**Note:** If you add a dependency to `flake.nix`, you must reload the environment.
+For single commands without entering the shell, use `nix develop -c <command>`.
+
 ### Code Quality
 
 The project enforces code quality via pre-commit hooks configured in `flake.nix`:
