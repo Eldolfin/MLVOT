@@ -21,6 +21,7 @@ demo-tp4:
 # Compile the project report
 report:
     typst compile report/main.typ
+    cp ./report/main.pdf ./report.pdf
 
 # Run all demos and compile report
 all: demo-tp1 demo-tp2 demo-tp3 demo-tp4 report

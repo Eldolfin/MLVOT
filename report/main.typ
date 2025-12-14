@@ -139,7 +139,6 @@ We utilize a discrete linear Kalman Filter with a Constant Velocity (CV) model.
     node((1,1), [State Estimate $hat(x)_k$], shape: rect),
     edge((1,1), (0,1), "->"),
     node((0,1), [Kalman Predict], shape: rect, fill: blue.lighten(80%)),
-    edge((0,1), (2,1), "->", [Prior $hat(x)_(k|k-1)$], label-pos: 0.5, label-side: center),
   ),
   caption: [Kalman Filter predict-update cycle.]
 )
