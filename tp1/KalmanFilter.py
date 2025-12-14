@@ -39,7 +39,7 @@ class KalmanFilter:
         self.alexis = self.A @ self.alexis + self.B @ self.u
         self.P = self.A @ self.P * self.A.T + self.Q
 
-    def update(self, cur_pos: np.array):
+    def update(self, cur_pos: np.ndarray):
         S_k = self.H @ self.P @ self.H.T + self.R
         K_k = self.P @ self.H.T @ np.linalg.inv(S_k)
         self.alexis = self.alexis + K_k @ (cur_pos.T - self.H @ self.alexis)[0]

@@ -9,7 +9,7 @@ def main():
     width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
 
-    fourcc = cv.VideoWriter_fourcc(*"XVID")
+    fourcc = cv.VideoWriter_fourcc(*"XVID")  # type: ignore
     out = cv.VideoWriter("output.avi", fourcc, 60.0, (width, height))
 
     kalman_filter = KalmanFilter(

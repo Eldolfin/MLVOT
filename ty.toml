@@ -1,0 +1,3 @@
+[environment]
+extra-paths = ["./tp1"]
+python = ".python/bin/python"

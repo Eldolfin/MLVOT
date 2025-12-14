@@ -14,27 +14,28 @@
         pkgs = nixpkgs.legacyPackages.${system};
         precommit-config = self.checks.${system}.pre-commit-check.config;
         lib = pkgs.lib;
+        python = pkgs.python313.withPackages (ppkgs:
+          with ppkgs; [
+            opencv-python
+            numpy
+
+            # dev tools
+            ipython
+            ipdb
+            # ruff
+            python-lsp-server
+          ]);
       in {
         devShell = let
           inherit (self.checks.${system}.pre-commit-check) shellHook enabledPackages;
         in
           pkgs.mkShell {
-            inherit shellHook;
-            buildInputs =
-              enabledPackages
-              ++ (with pkgs; [
-                (python313.withPackages (ppkgs:
-                  with ppkgs; [
-                    opencv-python
-                    numpy
-
-                    # dev tools
-                    ipython
-                    ipdb
-                    # ruff
-                    python-lsp-server
-                  ]))
-              ]);
+            shellHook =
+              shellHook
+              + ''
+                ln -s ${python} .python
+              '';
+            buildInputs = enabledPackages ++ [python];
           };
 
         checks = {
@@ -45,13 +46,12 @@
               alejandra.enable = true;
               ruff.enable = true;
               ruff-format.enable = true;
-              isort.enable = true;
               ty = rec {
                 enable = true;
                 name = "ty";
                 description = "An extremely fast Python type-checker, written in Rust.";
-                # package = pkgs.ty;
-                entry = "${lib.getExe pkgs.ty} check";
+                package = pkgs.ty;
+                entry = "${lib.getExe package} check --python ${python} --extra-search-path tp1/";
                 types = ["python"];
               };
               markdownlint.enable = true;
