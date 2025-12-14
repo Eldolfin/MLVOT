@@ -1,37 +1,88 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 #import fletcher.shapes: diamond
 
+// --- Styling Definitions ---
+#let primary-color = rgb("#003f5c") // Deep blue
+#let accent-color = rgb("#bc5090") // Muted magenta
+#let text-color = rgb("#222222")
+#let bg-color = rgb("#ffffff")
+
 #set document(
-  title: "MLVOT Project Report",
+  title: "MLVOT Project Report - oscar.le-dauphin",
   author: "Oscar Le Dauphin",
   date: datetime.today(),
 )
 
 #set page(
   paper: "a4",
-  margin: (x: 2cm, y: 2cm),
+  margin: (x: 2.5cm, y: 2.5cm),
   numbering: "1",
+  header: align(right)[
+    #text(size: 8pt, fill: gray)[MLVOT - Object Tracking Project]
+    #line(length: 100%, stroke: 0.5pt + gray)
+  ],
 )
 
 #set text(
   font: "New Computer Modern",
   size: 11pt,
+  fill: text-color,
   lang: "en"
 )
 
 #set heading(numbering: "1.1")
 
-#align(center)[
-  #text(size: 20pt, weight: "bold")[MLVOT Project Report]
-  
-  #v(1cm)
-  #text(size: 14pt)[Machine Learning for Visual Object Tracking]
-  
-  #v(2cm)
-  #text(size: 12pt)[Oscar Le Dauphin]
-  
+#show heading.where(level: 1): it => [
   #v(0.5cm)
-  #text(size: 12pt)[SCIA - 2026]
+  #text(fill: primary-color, size: 16pt, weight: "bold")[#it]
+  #line(length: 100%, stroke: 1pt + primary-color)
+  #v(0.3cm)
+]
+
+#show heading.where(level: 2): it => [
+  #v(0.3cm)
+  #text(fill: accent-color, size: 13pt, style: "italic")[#it]
+  #v(0.1cm)
+]
+
+#show figure: it => align(center)[
+  #block(
+    stroke: 0.5pt + gray.lighten(50%),
+    radius: 5pt,
+    inset: 10pt,
+    fill: luma(250),
+    it.body
+  )
+  #v(0.2cm)
+  #text(size: 9pt, style: "italic", fill: gray.darken(20%))[#it.caption]
+  #v(0.5cm)
+]
+
+// --- Title Page ---
+#align(center + horizon)[
+  #rect(
+    width: 100%,
+    fill: primary-color.lighten(90%),
+    stroke: primary-color + 2pt,
+    radius: 10pt,
+    inset: 2cm
+  )[
+    #text(size: 24pt, weight: "bold", fill: primary-color)[MLVOT Project Report]
+    
+    #v(1cm)
+    #text(size: 16pt, fill: text-color)[Machine Learning for Visual Object Tracking]
+    
+    #v(2cm)
+    #line(length: 50%, stroke: 1pt + accent-color)
+    #v(0.5cm)
+    
+    #text(size: 14pt, weight: "bold")[Oscar Le Dauphin]
+    #v(0.2cm)
+    #text(size: 12pt)[SCIA - 2026]
+    
+    #v(2cm)
+    #image("images/dataset_sample.jpg", width: 80%)
+  ]
 ]
 
 #pagebreak()
@@ -54,9 +105,7 @@ The tracking algorithms are evaluated on the `ADL-Rundle-6` sequence from the MO
 - *Challenges:* The dataset includes frequent occlusions, crowded scenes with crossing trajectories, and variations in object scale.
 
 #figure(
-  rect(width: 100%, height: 6cm, fill: luma(240))[
-    #align(center + horizon)[*Placeholder: Sample frames from ADL-Rundle-6*]
-  ],
+  image("images/dataset_sample.jpg", width: 100%),
   caption: [Visual characteristics of the dataset: Crowded pedestrian street.]
 )
 
@@ -101,9 +150,7 @@ We tested the tracker on `randomball.avi`.
 - *Occlusion:* When the ball is momentarily not detected, the prediction step allows the tracker to maintain a trajectory estimate, although it drifts if the signal is lost for too long.
 
 #figure(
-  rect(width: 100%, height: 4cm, fill: luma(240))[
-    #align(center + horizon)[*Placeholder: Screenshots of TP1 Tracking (Green: Det, Red: Pred)*]
-  ],
+  image("images/tp1_res.png", width: 100%),
   caption: [Kalman filter tracking results on the ball sequence.]
 )
 
@@ -143,11 +190,10 @@ This approach introduces track management:
 == Real Data Testing
 - *Success:* Works surprisingly well for pedestrians moving in distinct lanes without overlap.
 - *Failure Cases:* The main limitation is the *Identity Switch*. When two pedestrians cross paths, their bounding boxes overlap significantly or one occludes the other. The IoU metric fails here, often swapping IDs or losing the occluded track.
+- *Detector Sensitivity:* A significant limitation observed is the *over-sensitivity of the detector*. The bounding boxes often jitter or appear on background clutter, creating "ghost" tracks that exist for only a few frames. Since our IoU tracker initializes tracks immediately upon detection, this leads to a high number of short-lived, false positive tracks (ID fragmentation).
 
 #figure(
-  rect(width: 100%, height: 4cm, fill: luma(240))[
-    #align(center + horizon)[*Placeholder: TP2 Result - ID Switching Example*]
-  ],
+  image("images/tp2_res.png", width: 100%),
   caption: [Identity switch occurring during a crossing event in IoU tracker.]
 )
 
@@ -187,12 +233,10 @@ This allows the association gate to "follow" the object, making it robust to fas
 
 == Real Data Testing
 - *Improvements:* Tracking is smoother. The system handles brief occlusions better because the Kalman filter continues to predict motion, maintaining a valid search region for re-association.
-- *Limitations:* It still relies purely on geometry. If two objects have similar predicted positions (e.g., walking close together), the IoU metric alone cannot distinguish them.
+- *Limitations:* It still relies purely on geometry. If two objects have similar predicted positions (e.g., walking close together), the IoU metric alone cannot distinguish them. Furthermore, the *detector noise* issue persists; the Kalman filter tries to smooth the jittery bounding boxes, but large jumps in detection can still cause the filter to diverge or fail association.
 
 #figure(
-  rect(width: 100%, height: 4cm, fill: luma(240))[
-    #align(center + horizon)[*Placeholder: TP3 Result - Improved Tracking continuity*]
-  ],
+  image("images/tp3_res.png", width: 100%),
   caption: [Kalman-Guided tracker maintaining ID through linear motion.]
 )
 
@@ -240,8 +284,8 @@ We utilize an *OSNet* model to extract a 512-dimensional feature vector for each
 - *Conclusion:* While geometric tracking (TP3) is sufficient for simple, sparse scenarios, appearance information (TP4) is critical for crowded, complex environments where trajectories intersect.
 
 #figure(
-  rect(width: 100%, height: 4cm, fill: luma(240))[
-    #align(center + horizon)[*Placeholder: TP4 Result - ReID recovering ID after occlusion*]
-  ],
+  image("images/tp4_res.png", width: 100%),
   caption: [Successful re-identification after occlusion using visual features.]
 )
+
+#bibliography("refs.bib")
