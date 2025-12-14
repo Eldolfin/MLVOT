@@ -52,7 +52,7 @@
                 name = "ty";
                 description = "An extremely fast Python type-checker, written in Rust.";
                 package = pkgs.ty;
-                entry = "${lib.getExe package} check --python ${python} --extra-search-path tp1/ --extra-search-path tp2/";
+                entry = "${lib.getExe package} check --python ${python} --extra-search-path tp1/ --extra-search-path tp2/ --extra-search-path tp3/";
                 types = ["python"];
               };
               markdownlint.enable = true;
