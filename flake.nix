@@ -36,7 +36,13 @@
               + ''
                 ln -s ${python} .python
               '';
-            buildInputs = enabledPackages ++ [python pkgs.typst];
+            buildInputs =
+              enabledPackages
+              ++ [
+                python
+                pkgs.typst
+                pkgs.just
+              ];
           };
 
         checks = {
