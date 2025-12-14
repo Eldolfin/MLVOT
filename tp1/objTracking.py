@@ -31,14 +31,14 @@ def main():
             kalman_filter.predict()
             # Get predicted position (before update)
             predicted_pos = kalman_filter.state[:2].copy()
-            
+
             # Update step (correct with measurement)
             estimated_pos = kalman_filter.update(center)[:2]
-            
+
             # Extract scalar values from center array
             center_x = int(center[0, 0])
             center_y = int(center[1, 0])
-            
+
             # Draw blue rectangle for predicted position
             cv.rectangle(
                 frame,

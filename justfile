@@ -4,7 +4,7 @@ default:
 
 # Run TP1 demo (Single Object Tracking)
 demo-tp1:
-    cd tp1 && python main.py
+    cd tp1 && python objTracking.py
 
 # Run TP2 demo (IoU Tracker)
 demo-tp2:
