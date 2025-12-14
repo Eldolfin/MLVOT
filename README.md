@@ -4,13 +4,13 @@ This repository contains the practical assignments (TPs) for the MLVOT course.
 
 ## Report
 
-The project final report can be found at `./report.pdf`
+The project final report can be found at [./report.pdf](./report.pdf)
 
 ## Environment Setup
 
 This project uses **Nix** for reproducible environment management.
 
-1. Install Nix (if not already installed).
+1. Install Nix.
 2. Enter the development environment:
 
    ```bash
@@ -48,7 +48,7 @@ cd tp1
 python main.py
 ```
 
-Output: `tp1/output.avi`
+Output: [`tp1/output.avi`](./output_tp1.avi)
 
 ### TP 2: IoU-based Tracking (Bounding-Box Tracker)
 
@@ -58,7 +58,7 @@ Multi-object tracking using IoU and Hungarian Algorithm.
 python tp2/main.py
 ```
 
-Output: `output_tp2.avi`, `ADL-Rundle-6.txt`
+Output: [`output_tp2.avi`](./output_tp2.avi), [`ADL-Rundle-6.txt`](./ADL-Rundle-6.txt)
 
 ### TP 3: Kalman-Guided IoU Tracking
 
@@ -68,7 +68,7 @@ Extends TP2 with Kalman Filter predictions for better association.
 python tp3/main.py
 ```
 
-Output: `output_tp3.avi`
+Output: [`output_tp3.avi`](./output_tp3.avi)
 
 ### TP 4: Appearance-Aware IoU-Kalman Tracker
 
@@ -78,7 +78,7 @@ Extends TP3 with a ReID model (OSNet) for appearance-based association.
 python tp4/main.py
 ```
 
-Output: `output_tp4.avi`
+Output: [`output_tp4.avi`](./output_tp4.avi)
 
 ## Code Quality
 
