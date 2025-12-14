@@ -8,3 +8,9 @@ transfer_11230861_files_f715aa64.zip
 ADL-Rundle-6
 report/main.pdf
 fetcher_manual.pdf
+
+# Output files
+output_tp*.avi
+*.avi
+ADL-Rundle-6.txt
+tp1/output.avi

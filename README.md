@@ -45,7 +45,7 @@ Tracks a ball in a video using a Kalman Filter.
 
 ```bash
 cd tp1
-python main.py
+python objTracking.py
 ```
 
 Output: [`tp1/output.avi`](./output_tp1.avi)

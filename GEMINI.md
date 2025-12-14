@@ -29,16 +29,15 @@ nix develop
 
 ### `tp1/` (Object Tracking)
 
-* **`main.py`**: The entry point.
+* **`objTracking.py`**: The main entry point.
   * Reads video from `video/randomball.avi`.
   * Uses `Detector` to find the object center.
-  * Uses `KalmanFilter` to predict state.
-  * Draws detection (blue box), prediction (red box), and trajectory.
+  * Uses `KalmanFilter` to predict and update state.
+  * Draws detection (green circle), prediction (blue rectangle), estimated position (red rectangle), and trajectory.
   * Saves result to `output.avi`.
 * **`Detector.py`**: Implements object detection using Canny edge detection and
   contour finding to locate circular objects.
-* **`KalmanFilter.py`**: (Presumed) Implementation of the Kalman Filter logic.
-* **`objTracking.py`**: Currently empty.
+* **`KalmanFilter.py`**: Implementation of the Kalman Filter for tracking with prediction and update steps.
 
 ### `tp2/` (Tracking with Detection and Association)
 
@@ -86,7 +85,7 @@ nix develop
 
     ```bash
     cd tp1
-    python main.py
+    python objTracking.py
     ```
 
 **Note:** If you add a dependency to `flake.nix`, you must reload the environment.
