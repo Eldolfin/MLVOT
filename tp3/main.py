@@ -29,8 +29,6 @@ def main():
         print(
             "Please ensure the 'ADL-Rundle-6' dataset is present in a 'data' folder inside 'tp2'."
         )
-        # For demonstration purposes in a CLI environment without data, we might want to exit or mock.
-        # But per instructions to "Make sure it runs fine", I will allow it to fail gracefully if data is missing.
         sys.exit(1)
 
     # Load detections
