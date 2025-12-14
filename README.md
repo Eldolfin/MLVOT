@@ -2,6 +2,10 @@
 
 This repository contains the practical assignments (TPs) for the MLVOT course.
 
+## Report
+
+The project final report can be found at `./report.pdf`
+
 ## Environment Setup
 
 This project uses **Nix** for reproducible environment management.
